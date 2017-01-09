@@ -11,10 +11,10 @@ layout: page
   {% endif %}
   <li class="listing-item">
     <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ baseurl }}/{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    <a href="{{ site.baseurl }}/{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
     <p>	  
       {{ post.excerpt | remove: '<p>' | remove: '</p>' }} &raquo;
-  	  <a href="{{ baseurl }}/{{ post.url }}">read more...</a>
+  	  <a href="{{ site.baseurl }}/{{ post.url }}">read more...</a>
   	  </p>
   </li>
 {% endfor %}
