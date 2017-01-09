@@ -1,3 +1,4 @@
 theme: jekyll-theme-minimal
 baseurl: /blog
 baseimgurl: /blog/assets
+paginate: 20
