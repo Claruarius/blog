@@ -2,7 +2,7 @@
 date: 2017-01-09
 layout: post
 title: 你好，世界
-categories: 编程语言
+categories: language
 tags: 杂谈
 excerpt: 我的第一篇文章
 ---
