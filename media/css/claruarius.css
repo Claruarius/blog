@@ -1,0 +1,62 @@
+#s_tab {
+    display: block;
+}
+#s_tab {
+    background: #23201e;
+    line-height: 36px;
+    height: 38px;
+    padding: 10px 0 0 10px;
+    float: none;
+    zoom: 1;
+}
+
+#s_tab a, #s_tab b {
+    width: 54px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    color: #fafafa;
+    font-size: 18px;
+}
+
+#s_tab b {
+    border-bottom: 2px solid #b6b6b6;
+    font-weight: 700;
+    color: #fafafa;
+}
+
+li {list-style-type:none;}
+
+.listing-seperator {
+    font-size: 18px;
+    font-weight: bold;    
+}
+
+article {
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+#tag_cloud{margin-bottom: 1em;}
+#tag_cloud a:hover{color:#333333 !important;text-decoration:none;}
+
+#title {
+    font-size: 1.6em;
+    display: block;
+    font-weight: bold;
+    padding-top:10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
+
+footer{
+text-align:center;
+display:block;
+border-top: 1px dashed #CCC;
+}
+
+footer small {
+font-size: 13px;
+color: #AAA;
+}

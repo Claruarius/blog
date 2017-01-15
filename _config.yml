@@ -1,4 +1,8 @@
-theme: jekyll-theme-minimal
 baseurl: /blog
 baseimgurl: /blog/assets
 paginate: 20
+email: 614167200@qq.com
+name: claruarius
+blogurl: https://claruarius.github.io/blog/
+projecturl: https://github.com/Claruarius/blog
+gems: [jekyll-paginate]

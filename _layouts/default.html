@@ -2,10 +2,50 @@
     <html>
         <head>
             <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+            <link rel="stylesheet" href="{{ site.baseurl }}/media/css/home.css" />
+            <link rel="stylesheet" href="{{ site.baseurl }}/media/css/claruarius.css" />
             <title>{{ page.title }}</title>
         </head>
         <body>
-            <div id="title"><h2>{{ page.title }}</h2></div>
-            <div id="article">{{ content }}</div>
+            <div id="container">
+                <div id="main">
+                    <header id="title">{{ page.title }}</header>
+                    <div id="s_tab">
+                    {% if page.title == "首页" %}
+                        <b>首页</b>
+                    {% else %}
+                        <a title="网站首页" class="" href="{{ site.baseurl }}/">首页</a>
+                    {% endif %}
+                    {% if page.title == "分类" %}
+                        <b>分类</b>
+                    {% else %}
+                        <a title="文章分类" class="" href="{{ site.baseurl }}/categories/">分类</a>
+                    {% endif %}
+                    {% if page.title =="标签" %}
+                        <b>标签</b>
+                    {% else %}
+                        <a title="标签索引" class="" href="{{ site.baseurl }}/tags/">标签</a>
+                    {% endif %}
+                    <!--<span><a title="留言交流" class="" href="/guestbook/">留言</a></span>-->
+                    {% if page.title == "关于" %}
+                        <b>关于</b>
+                    {% else %}
+                        <a title="关于站长" class="" href="{{ site.baseurl }}/about/">关于</a>
+                    {% endif %}
+                    <!--<span><a title="种子订阅" class="" href="/feed/" target="_blank">订阅</a></span>-->
+                    </div>
+                    <article>
+                    <div id="article">{{ content }}</div>
+                    </article>
+                </div>
+                
+                <footer>
+                            <p><small>
+            <a href="{{ site.blogurl }}" target="_blank" title="撰写文章">Po</a>wer<a href="{{ site.blogurl }}" target="_blank" title="编辑页面">ed</a> by <a href="http://jekyllrb.com" target="_blank">Jekyll</a> @ <a href="{{ site.projecturl }}" target="_blank" title="项目主页">GitHub</a>
+             | <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/cn/" target="_blank" title="许可协议">©</a> 2014 - {{site.time | date:"%Y"}} <a href="/about/">{{ site.name }}</a>
+             | <a href="http://www.cnblogs.com/claruarius/" target="_blank">@cnblogs</a>
+                      </small></p>
+                </footer>
+            </div>
         </body>
     </html>
