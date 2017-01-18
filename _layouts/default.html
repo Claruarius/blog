@@ -1,52 +1,53 @@
 <!DOCTYPE html>
-    <html>
-        <head>
-            <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-            <link rel="stylesheet" href="{{ site.baseurl }}/media/css/home.css" />
-            <link rel="stylesheet" href="{{ site.baseurl }}/media/css/claruarius.css" />
-            <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-            <title>{% if page.path == 'index.html' %}{{ site.name }}{% else %}{% unless page.id %}{{ site.name }} - {% endunless %}{{ page.title }}{% endif %}</title>
-        </head>
-        <body>
-            <div id="container">
-                <div id="main">
-                    <header id="title">{{ page.title }}</header>
-                    <div id="s_tab">
-                    {% if page.title == "首页" %}
-                        <b>首页</b>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!--[if lte IE 8]><link rel="stylesheet" href="{{ site.baseurl }}/media/css/responsive-nav.css"><![endif]-->
+    <!--[if gt IE 8]><!--><link rel="stylesheet" href="{{ site.baseurl }}/media/css/styles.css"><!--<![endif]-->
+    <link rel="stylesheet" href="{{ site.baseurl }}/media/css/home.css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/media/css/claruarius.css" />
+    <script src="{{ site.baseurl }}/media/js/responsive-nav.js"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <title>{% if page.path == 'index.html' %}{{ site.name }}{% else %}{% unless page.id %}{{ site.name }} - {% endunless %}{{ page.title }}{% endif %}</title>
+  </head>
+  <body>
+    <div role="navigation" id="foo" class="nav-collapse">
+      <ul id="nav">
+        {% if page.title == "首页" %}
+                        <li class="active"><a title="网站首页" href="{{ site.baseurl }}/">首页</a></li>
                     {% else %}
-                        <a title="网站首页" class="" href="{{ site.baseurl }}/">首页</a>
+                        <li><a title="网站首页" href="{{ site.baseurl }}/">首页</a></li>
                     {% endif %}
                     {% if page.title == "分类" %}
-                        <b>分类</b>
+                        <li class="active"><a title="文章分类" href="{{ site.baseurl }}/categories/">分类</a></li>
                     {% else %}
-                        <a title="文章分类" class="" href="{{ site.baseurl }}/categories/">分类</a>
+                        <li><a title="文章分类" href="{{ site.baseurl }}/categories/">分类</a></li>
                     {% endif %}
                     {% if page.title =="标签" %}
-                        <b>标签</b>
+                        <li class="active"><a title="标签索引" href="{{ site.baseurl }}/tags/">标签</a></li>
                     {% else %}
-                        <a title="标签索引" class="" href="{{ site.baseurl }}/tags/">标签</a>
+                        <li><a title="标签索引" href="{{ site.baseurl }}/tags/">标签</a></li>
                     {% endif %}
                     <!--<span><a title="留言交流" class="" href="/guestbook/">留言</a></span>-->
                     {% if page.title == "关于" %}
-                        <b>关于</b>
+                        <li class="active"><a title="关于站长" href="{{ site.baseurl }}/about/">关于</a></li>
                     {% else %}
-                        <a title="关于站长" class="" href="{{ site.baseurl }}/about/">关于</a>
+                        <li><a title="关于站长" href="{{ site.baseurl }}/about/">关于</a></li>
                     {% endif %}
-                    <!--<span><a title="种子订阅" class="" href="/feed/" target="_blank">订阅</a></span>-->
-                    </div>
-                    <article>
-                    <div id="article">{{ content }}</div>
-                    </article>
-                </div>
-                
-                <footer>
-                            <p><small>
-            <a href="{{ site.blogurl }}" target="_blank" title="撰写文章">Po</a>wer<a href="{{ site.blogurl }}" target="_blank" title="编辑页面">ed</a> by <a href="http://jekyllrb.com" target="_blank">Jekyll</a> @ <a href="{{ site.projecturl }}" target="_blank" title="项目主页">GitHub</a>
-             | <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/cn/" target="_blank" title="许可协议">©</a> 2014 - {{site.time | date:"%Y"}} <a href="/about/">{{ site.name }}</a>
-             | <a href="http://www.cnblogs.com/claruarius/" target="_blank">@cnblogs</a>
-                      </small></p>
-                </footer>
-            </div>
-        </body>
-    </html>
+      </ul>
+    </div>
+
+    <div role="main" class="main">
+      <a href="#nav" class="nav-toggle">Menu</a>
+    <h1>{{ page.title }}</h1>
+        <article>
+            <div id="article">{{ content }}</div>
+        </article>
+    </div>
+
+    <script>
+      var navigation = responsiveNav("foo", {customToggle: ".nav-toggle"});
+    </script>
+  </body>
+</html>
