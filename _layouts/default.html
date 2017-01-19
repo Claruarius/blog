@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="{{ site.baseurl }}/media/css/bootstrap.min.css">
     <!--[if lte IE 8]><link rel="stylesheet" href="{{ site.baseurl }}/media/css/responsive-nav.css"><![endif]-->
     <!--[if gt IE 8]><!--><link rel="stylesheet" href="{{ site.baseurl }}/media/css/styles.css"><!--<![endif]-->
-    <link rel="stylesheet" href="{{ site.baseurl }}/media/css/home.css" />
     <link rel="stylesheet" href="{{ site.baseurl }}/media/css/claruarius.css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/media/css/home.css" />
+    <script src="{{ site.baseurl }}/media/js/jquery-3.1.1.min.js"></script>
+    <script src="{{ site.baseurl }}/media/js/bootstrap.min.js"></script>
     <script src="{{ site.baseurl }}/media/js/responsive-nav.js"></script>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     <title>{% if page.path == 'index.html' %}{{ site.name }}{% else %}{% unless page.id %}{{ site.name }} - {% endunless %}{{ page.title }}{% endif %}</title>
@@ -38,12 +41,16 @@
       </ul>
     </div>
 
-    <div role="main" class="main">
+    <div role="main" class="main container-fluid">
       <a href="#nav" class="nav-toggle">Menu</a>
-    <h1>{{ page.title }}</h1>
-        <article>
-            <div id="article">{{ content }}</div>
-        </article>
+      <!--<div class="container-fluid">-->
+        <div class="row">
+          <div class="col-md-6"><h1>{{ page.title }}</h1></div>
+        </div>
+        <div class="row">
+          <div class="col-md-6"><article>{{ content }}</article></div>
+        </div>
+      <!--</div>-->
     <footer>
       <p><small>
       <a href="{{ site.blogurl }}" target="_blank" title="撰写文章">Po</a>wer<a href="{{ site.blogurl }}" target="_blank" title="编辑页面">ed</a> by <a href="http://jekyllrb.com" target="_blank">Jekyll</a> @ <a href="{{ site.projecturl }}" target="_blank" title="项目主页">GitHub</a>
