@@ -6,3 +6,5 @@ name: claruarius
 blogurl: https://claruarius.github.io/blog/
 projecturl: https://github.com/Claruarius/blog
 gems: [jekyll-paginate]
+highlighter: pygments
+markdown: kramdown
