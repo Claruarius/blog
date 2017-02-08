@@ -4,7 +4,8 @@ layout: page
 ---
 
 ---
-### 自我介绍
+
+### **自我介绍**
 
 {{ site.about }}
 
@@ -12,7 +13,8 @@ layout: page
 
 
 ---
-### 经历
+
+### **经历**
 
 * 2011.09 ~ 2015.06 求学于南中国一般大学（South China Normal University）计算机学院
 
@@ -21,7 +23,7 @@ layout: page
 
 ----
 
-### 联系方式：
+### **联系方式**
 
 {% if site.qq %}
 ＱＱ：[{{ site.qq }}](tencent://message/?uin={{ site.qq }})
