@@ -3,14 +3,14 @@ date: 2017-02-16
 layout: post
 title: WifiTracker的设计及其问题
 categories: Android
-tags: WIFI 设计模式
-excerpt: Activity是被动调用，所以理解Activity的生命周期，对于应用数据至关重要
+tags: Wi-Fi 设计模式
+excerpt: WifiTracker的设计中有两个Handler，一个负责读取数据，一个负责更新数据。
 ---
 ### **WifiTracker 中两个handler**
 
 **1、MainHandler**
 ![](/blog/assets/wifi/wifitracker-mainhandler.png)
-看MainHandler中的消息可知道MainHandler是用来通知观察者状态发生变化需要过来区数据了。
+看MainHandler中的消息可知道MainHandler是用来通知观察者状态发生变化需要过来取数据了。
 
 **2、WorkerHandler**
 ![](/blog/assets/wifi/wifitracker-workerhandler.png)
@@ -24,7 +24,7 @@ excerpt: Activity是被动调用，所以理解Activity的生命周期，对于�
 也就是说观察者可以是WifiSettings或者是SystemUI的WifiTile等
 
 ### **问题来了**
-WifiTracker中有两个handler，也就是有两个异步。
+WifiTracker中有两个Handler，也就是有两个异步。
 我们暂且可以理解为MainHandler是读取数据用的，WorkerHandler是用于更新数据用的。两个异步的线程同时操作一个数据块，但是一个读，一个写，好像可以很和谐，而且Google也未在WifiTracker中加任何的同步锁，可能是为了快速读取数据更新数据吧。
 
 ### **数据块--AccessPoint**
