@@ -86,13 +86,14 @@ StaDisabledWithScanState::enter()函数的调用。
 该消息将会在WifiStateMachine的DisconnectedState状态中被处理，可以看到该消息会将WifiStateMachine状态置为**ScanModeSate**，这是一种什么状态，这就是一种**关闭WIFI才有的状态**啊，至此可见**WifiController与WifiStateMachine的状态不一致！**WifiController的状态是StaEnabledState，而WifiStateMachine的状态是ScanModeSate,就是说WifiStateMachine已经处于WIFI关闭状态，但是WifiController还处于WIFI打开状态。
 
 如下的log也证明了我们的想法。
-情景1----------------打不开WIFI列表
+
+* 情景1----------------打不开WIFI列表
 ![](/blog/assets/wifi/wificontroller-wifistatemachine-log1.png)
 
-情景2----------------打不开WIFI列表
+* 情景2----------------打不开WIFI列表
 ![](/blog/assets/wifi/wificontroller-wifistatemachine-log2.png)
 
-情景3---------------可以正常打开WIFI列表
+* 情景3---------------可以正常打开WIFI列表
 ![](/blog/assets/wifi/wificontroller-wifistatemachine-log3.png)
 
 至此已经有必要修改该状态机的状态。
