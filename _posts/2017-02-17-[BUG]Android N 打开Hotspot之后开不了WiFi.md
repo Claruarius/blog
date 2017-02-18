@@ -87,13 +87,13 @@ StaDisabledWithScanState::enter()函数的调用。
 
 如下的log也证明了我们的想法。
 
-情景1----------------打不开WIFI列表
+* 情景1----------------打不开WIFI列表
 ![](/blog/assets/wifi/wificontroller-wifistatemachine-log1.png)
 
-情景2----------------打不开WIFI列表
+* 情景2----------------打不开WIFI列表
 ![](/blog/assets/wifi/wificontroller-wifistatemachine-log2.png)
 
-情景3---------------可以正常打开WIFI列表
+* 情景3---------------可以正常打开WIFI列表
 ![](/blog/assets/wifi/wificontroller-wifistatemachine-log3.png)
 
 至此已经有必要修改该状态机的状态。
