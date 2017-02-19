@@ -2,7 +2,7 @@
 date: 2017-02-05
 layout: post
 title: WifiMonitor如何跟踪wpa_supplicant
-categories: Wi-Fi
+categories: Android
 tags: Wi-Fi
 excerpt: WifiMonitor是负责跟踪wps_supplicant，那是如何跟踪？
 ---
