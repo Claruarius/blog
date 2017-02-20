@@ -77,7 +77,22 @@ StaDisabledWithScanState::enter()函数的调用。
 该函数将会影响WifiStateMachine的运行。好，现在进入WifiStateMachine
 ![](/blog/assets/wifi/wificontroller-wifistatemachine-set-operational-mode.png)
 
-该消息将会在WifiStateMachine的DisconnectedState状态中被处理，可以看到该消息会将WifiStateMachine状态置为**ScanModeSate**，这是一种什么状态，这就是一种**关闭WIFI才有的状态**啊，至此可见**WifiController与WifiStateMachine的状态不一致！**WifiController的状态是StaEnabledState，而WifiStateMachine的状态是ScanModeSate,就是说WifiStateMachine已经处于WIFI关闭状态，但是WifiController还处于WIFI打开状态。
+该消息将会在WifiStateMachine的DisconnectedState状态中被处理，可以看到该消息会将WifiStateMachine状态置为**ScanModeSate**，这是一种什么状态，这就是一种**关闭WIFI才有的状态**啊。
+这个时候又有另一个问题，为什么情况（2）接收到CMD_WIFI_TOGGLED，使WifiController的状态变为StaDisabledWithScanState？
+
+原因就是在开启USB Tethering时候调用了
+mWifiManager.setWifiEnabled(false);
+![](/blog/assets/wifi/wificontroller-usbtethering.png)
+
+该问题的关键是WifiStateMachine处于ScanMode情况（1）是主动关闭的，所以一开始WifiStateMachine就处于ScanMode了，情况（2）是USB Tethering主动调用setWifiEnabled为false造成的，
+**所以问题可以都归结为一类，就是在WIFI关闭的情况下，打开hotspot之后会打不开WIFI**
+
+造成该问题的原因是WifiStateMachine在关掉Hotspot之后由DriverStartedState状态转换到其他状态时候，
+![](/blog/assets/wifi/wificontroller-wifistatemachine-driverstartedstate.png)
+
+WifiStateMachine会根据mOperationalMode来设置接下来的状态，而mOperationalMode就是WIfiStateMachine由开始接收到CMD_SET_AP消息之前的一个状态决定的。也就是说在发起Hotspot之前已经将WIFI关闭的话，mOperationalMode就是**非CONNECT_MODE**，与上面的分析吻合。**因此mOperationalMode也可以看成是WifiStateMachine的一个状态临时保存变量。**
+
+至此可见**WifiController与WifiStateMachine的状态不一致！**WifiController的状态是StaEnabledState，而WifiStateMachine的状态是ScanModeSate,就是说WifiStateMachine已经处于WIFI关闭状态，但是WifiController还处于WIFI打开状态。
 
 如下的log也证明了我们的想法。
 
@@ -99,21 +114,6 @@ StaDisabledWithScanState::enter()函数的调用。
 ![](/blog/assets/wifi/wificontroller-bug-fix.png)
 
 将等待的状态修改为mDeviceActiveState。
-
-这个时候又有另一个问题，为什么情况（2）接收到CMD_WIFI_TOGGLED，使WifiController的状态变为StaDisabledWithScanState？
-
-原因就是在开启USB Tethering时候调用了
-mWifiManager.setWifiEnabled(false);
-![](/blog/assets/wifi/wificontroller-usbtethering.png)
-
-该问题的关键是WifiStateMachine处于ScanMode情况（1）是主动关闭的，所以一开始WifiStateMachine就处于ScanMode了，情况（2）是USB Tethering主动调用setWifiEnabled为false造成的，
-**所以问题可以都归结为一类，就是在WIFI关闭的情况下，打开hotspot之后会打不开WIFI**
-
-造成该问题的原因是WifiStateMachine在关掉Hotspot之后由DriverStartedState状态转换到其他状态时候，
-![](/blog/assets/wifi/wificontroller-wifistatemachine-driverstartedstate.png)
-
-WifiStateMachine会根据mOperationalMode来设置接下来的状态，而mOperationalMode就是WIfiStateMachine由开始接收到CMD_SET_AP消息之前的一个状态决定的。也就是说在发起Hotspot之前已经将WIFI关闭的话，mOperationalMode就是**非CONNECT_MODE**，与上面的分析吻合。**因此mOperationalMode也可以看成是WifiStateMachine的一个状态临时保存变量。**
-
 
 
 
