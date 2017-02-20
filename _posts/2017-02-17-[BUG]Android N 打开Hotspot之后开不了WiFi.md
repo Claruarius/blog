@@ -19,12 +19,6 @@ excerpt: Android 在WiFi模块的一大创造就是状态机的运用，WifiCont
 
 ```
 （1）WIFI-OFF && WIFI-Tether
-	Line 5963: 01-01 09:24:33.336  3025  3076 D WifiController:  StaDisabledWithScanState !CMD_WIFI_TOGGLED
-	Line 5964: 01-01 09:24:33.336  3025  3076 D WifiController: StaEnabledState enter
-	Line 5965: 01-01 09:24:33.337  3025  3076 D WifiController: DeviceActiveState enter
-	Line 6662: 01-01 09:24:35.084  3025  3076 D WifiController:  DeviceActiveState !CMD_WIFI_TOGGLED
-	Line 6663: 01-01 09:24:35.084  3025  3076 D WifiController:  StaEnabledState !CMD_WIFI_TOGGLED
-	Line 6664: 01-01 09:24:35.085  3025  3076 D WifiController: StaDisabledWithScanState enter
 	Line 6940: 01-01 09:25:18.286  3025  3076 D WifiController:  StaDisabledWithScanState !CMD_SET_AP
 	Line 6941: 01-01 09:25:18.286  3025  3076 D WifiController: ApStaDisabledState enter
 	Line 6942: 01-01 09:25:18.287  3025  3076 D WifiController:  ApStaDisabledState !CMD_SET_AP
@@ -106,6 +100,20 @@ StaDisabledWithScanState::enter()函数的调用。
 
 将等待的状态修改为mDeviceActiveState。
 
-这个时候又有另一个问题，为什么情况（3）没有接收到CMD_WIFI_TOGGLED,而其他两种情况都会处理到这种消息呢？还有待研究。
+这个时候又有另一个问题，为什么情况（2）接收到CMD_WIFI_TOGGLED，使WifiController的状态变为StaDisabledWithScanState？
+
+原因就是在开启USB Tethering时候调用了
+mWifiManager.setWifiEnabled(false);
+![](/blog/assets/wifi/wificontroller-usbtethering.png)
+
+该问题的关键是WifiStateMachine处于ScanMode情况（1）是主动关闭的，所以一开始WifiStateMachine就处于ScanMode了，情况（2）是USB Tethering主动调用setWifiEnabled为false造成的，
+**所以问题可以都归结为一类，就是在WIFI关闭的情况下，打开hotspot之后会打不开WIFI**
+
+造成该问题的原因是WifiStateMachine在关掉Hotspot之后由DriverStartedState状态转换到其他状态时候，
+![](/blog/assets/wifi/wificontroller-wifistatemachine-driverstartedstate.png)
+
+WifiStateMachine会根据mOperationalMode来设置接下来的状态，而mOperationalMode就是WIfiStateMachine由开始接收到CMD_SET_AP消息之前的一个状态决定的。也就是说在发起Hotspot之前已经将WIFI关闭的话，mOperationalMode就是**非CONNECT_MODE**，与上面的分析吻合。**因此mOperationalMode也可以看成是WifiStateMachine的一个状态临时保存变量。**
+
+
 
 
