@@ -1,6 +1,6 @@
 baseurl: /blog
 baseimgurl: /blog/assets
-paginate: 20
+paginate: 10
 email: 614167200@qq.com
 name: claruarius
 blogurl: https://claruarius.github.io/blog/
