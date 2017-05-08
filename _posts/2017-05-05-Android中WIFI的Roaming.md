@@ -19,6 +19,7 @@ handleSupplicantStateChange(Message message)函数
 
 
 * 2、 handleSupplicantStateChange(Message message)函数
+
 该函数在DriverStartingState状态收到WifiMonitor.SUPPLICANT_STATE_CHANGE_EVENT消息。
 
 在DriverStoppingState状态收到WifiMonitor.SUPPLICANT_STATE_CHANGE_EVENT消息
