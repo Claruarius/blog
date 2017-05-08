@@ -113,3 +113,7 @@ mWifiConfigManager.mThresholdQualifiedRssi5.get()))
 ## **总结成流程图**
 ![](/blog/assets/wifi/wifi-roaming.jpg)
 
+* 9、	**以上的流程图是对除了2以外的梳理，2的Roaming行为我个人认为是wpa_supplicant的Roaming行为，而上文的流程图是WifiStateMachine的Roaming行为。**
+
+![](/blog/assets/wifi/wifi-roaming-1.jpg)
+
