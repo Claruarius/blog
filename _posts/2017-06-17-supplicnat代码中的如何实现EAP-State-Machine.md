@@ -92,7 +92,7 @@ METHOD阶段就是使用具体的EAP METHOD进行认证的阶段。该阶段因�
 
 
 ### **五、 一个需求的分析**
-最近遇到一个运营商提出的需求，跟MTK一起分析了源码，最后发现不支持，在这里将分析的过程分享一下。主要代码都在supplicant源码中，属于开源部分。需求如下:
+最近遇到一个运营商提出的需求，最后发现不支持，在这里将分析的过程分享一下。主要代码都在supplicant源码中，属于开源部分。需求如下:
 
 **The terminal shall not delete assigned pseudonyms and/or fast re-authentication tokens in case the EAP exchange fails, with a notification from the network with the value of 1026 (0x0402 User has been temporarily denied access to the requested service) or 1031 (0x0407 User has not subscribed to the requested service) and MUST use the assigned pseudonyms or fast re-authentication token in subsequent retries to connect to the network.**
 
