@@ -5,12 +5,15 @@ layout: page
 
 <div id='tag_cloud'>
 {% for tag in site.tags %}
+{% if tag[0] != 'Kernel' %}
 <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>|
+{% endif %}
 {% endfor %}
 </div>
 
 <ul class="listing">
 {% for tag in site.tags %}
+{% if tag[0] != 'Kernel' %}
   <li class="listing-seperator" id="{{ tag[0] }}">{{ tag[0] }}</li>
 {% for post in tag[1] %}
   <li class="listing-item">
@@ -18,6 +21,7 @@ layout: page
   <a href="{{ site.baseurl }}/{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
   </li>
 {% endfor %}
+{% endif %}
 {% endfor %}
 </ul>
 

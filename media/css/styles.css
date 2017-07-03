@@ -55,12 +55,6 @@ h2 {
   margin: 1em 0 .5em;
 }
 
-p {
-  float: left;
-  width: 100%;
-  margin-bottom: 1em;
-}
-
 p.intro {
   font-size: 1.25em;
   color: #555;

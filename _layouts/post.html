@@ -30,8 +30,20 @@ layout: default
 <section align="right">
 <br/>
 <span>
-	{% if page.previous %}<a href="{{ site.baseurl }}/{{ page.previous.url }}" class="pageNav" {% unless page.previous %} class="pageNavInvalid" {% endunless %} >上一篇</a>{% endif %}
+	{% if page.previous %}
+	{% if page.previous.title contains 'Linux内核' %}
+	<a href="{{ site.baseurl }}/{{ page.previous.previous.url }}" class="pageNav" {% unless page.previous %} class="pageNavInvalid" {% endunless %} >上一篇</a>
+	{% else %}
+	<a href="{{ site.baseurl }}/{{ page.previous.url }}" class="pageNav" {% unless page.previous %} class="pageNavInvalid" {% endunless %} >上一篇</a>
+	{% endif %}
+	{% endif %}
 	&nbsp;&nbsp;&nbsp;
-	{% if page.next %}<a href="{{ site.baseurl }}/{{ page.next.url }}" class="pageNav" {% unless page.next %} class="pageNavInvalid" {% endunless %} >下一篇</a>{% endif %}
+	{% if page.next %}
+	{% if page.next.title contains 'Linux内核' %}
+	<a href="{{ site.baseurl }}/{{ page.next.next.url }}" class="pageNav" {% unless page.next %} class="pageNavInvalid" {% endunless %} >下一篇</a>
+	{% else %}
+	<a href="{{ site.baseurl }}/{{ page.next.url }}" class="pageNav" {% unless page.next %} class="pageNavInvalid" {% endunless %} >下一篇</a>
+	{% endif %}
+	{% endif %}
 </span>
 </section>

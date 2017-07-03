@@ -4,6 +4,9 @@ layout: page
 ---
 <ul class="listing">
 {% for post in paginator.posts %}
+{% if post.title contains 'Linux内核' %}
+{% continue %}
+{% endif %}
   {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
   {% if year != y %}
     {% assign year = y %}
