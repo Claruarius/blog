@@ -85,7 +85,7 @@ if ((hostname != NULL
 但由于我的现在的Android平台是 7.1, 所以经查证在`android_getaddrinfo_proxy`函数中没有通过系统属性获取DNS解析地址的源码, 在android 4.3开始DNS解析全部**由netd进程代理**.
 ![](/blog/assets/wifi/wifi-dns-2.png)
 
-所以应该告诉netd我的DNS解析地址事多少.
+所以应该告诉netd我的DNS解析地址是多少.
 
 网上资料[android 4.3以上修改DNS 及 流程（netd）](http://blog.csdn.net/ganyue803/article/details/51646284)主要介绍Android DNS的流程. 通过该文,可以提炼出以下两个步骤:
 (1)设置iptables
