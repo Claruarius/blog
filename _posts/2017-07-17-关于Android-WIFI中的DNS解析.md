@@ -12,13 +12,23 @@ excerpt: 最近有一个同事不走寻常路, 在adb shell中启动WIFI驱动, 
 ## **准备**
 
 其实这些都在文章[wpa_cli与wpa_supplicant的交互命令](http://www.cnblogs.com/lidabo/p/4660213.html) 可以找到.
+
 (1) 准备一个eng版本软件的机器
 
-(2) adb shell进入shell, echo 1 > /dev/wmtWifi
+(2) adb shell进入shell, 
+```
+echo 1 > /dev/wmtWifi
+```
 
-(3)wpa_supplicant -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf
+(3)启动supplicant
+```
+wpa_supplicant -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf
+```
 
-(4)打开另一个终端, adb shell, 输入wpa_cli -iwlan0
+(4)打开另一个终端, adb shell, 输入
+```
+wpa_cli -iwlan0
+```
 
 (5)进行扫描,并获取扫描结果,如下两个命令
 ```
@@ -35,13 +45,18 @@ select_network 数字
 
 status //查看当前的状态
 ```
-(7)此时L2层已经连接上AP, 但是**L3层仍然未能连接上**(L2层是数据链路层, L3层是网络层). L3层顺利连接上的标志是获取到IP地址. 运行`ifconfig`命令可以看到wlan0未能获取到IPv4的地址. 所以运行如下的命令获取IP地址.
+(7)此时L2层已经连接上AP, 但是**L3层仍然未能连接上**(L2层是数据链路层, L3层是网络层). L3层顺利连接上的标志是获取到IP地址. 运行`ifconfig`命令可以看到wlan0未能获取到IPv4的地址. 
+![](/blog/assets/wifi/wifi-dns-4.png)
+所以运行如下的命令获取IP地址.
 ```
 dhcptool wlan0
 ```
 再次运行`ifconfig`命令可以看到已经获取IPv4地址.
+![](/blog/assets/wifi/wifi-dns-5.png)
 
 (8)使用`ping`命令可以ping通IP地址, 但是ping不通baidu.com等此类域名
+![](/blog/assets/wifi/wifi-dns-6.png)
+
 ## **问题-为什么DNS解析会失效**
 
 本人怀疑过以下的几个点
@@ -88,6 +103,7 @@ if ((hostname != NULL
 所以应该告诉netd我的DNS解析地址是多少.
 
 网上资料[android 4.3以上修改DNS 及 流程（netd）](http://blog.csdn.net/ganyue803/article/details/51646284)主要介绍Android DNS的流程. 通过该文,可以提炼出以下两个步骤:
+
 (1)设置iptables
 ```
 iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to-destination DNS地址
