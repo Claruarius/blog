@@ -119,13 +119,13 @@ $$
 为了选取最合适的$$\beta$$让等式"尽量成立", 引入**残差平方和函数S**
 
 $$S(\beta)=\left|X\beta-y \right|^2$$
- -> $$S(beta) = \sum(X\beta - y)^2$$
+ -> $$S(\beta) = \sum(X\beta - y)^2$$
 通过对$$S(\beta)$$进行微分求最值, 可以得到
 
-$$\sum_i(X_i\beta_j - y_i)X{_i}{^i} = 0$$
- -> $$\sum_i(X_iX{^j}{_i}\beta) = \sum_i(X{^j}{_i}y_i)$$ [备注: $$X{^j}{_i}$$代表X的第i行第j列, \beta参数的个数决定了最后结果的行数]
+$$\sum_i(X_i\beta_j - y_i)X{_i}{^j} = 0$$
+ -> $$\sum_i(X_iX{^j}{_i}\beta) = \sum_i(X{^j}{_i}y_i)$$ [备注: $$X{^j}{_i}$$代表X的第i行第j列, $$\beta$$参数的个数决定了最后结果的行数]
 
-对以上的式子进行解读:**X的第j列的所有行($$\sum_i$$)乘上对应的y然后求和,这就是$$X^Ty$$, 同理可以得到X^T(X\beta)**
+对以上的式子进行解读:**X的第j列的所有行($$\sum_i$$)乘上对应的y然后求和,这就是$$X^Ty$$, 同理可以得到$$X^T(X\beta)$$**
 
 随后得到$$X^TX\beta = X^Ty$$, 就是$$\beta = (X^TX)^{-1}X^Ty$$
 
@@ -134,3 +134,76 @@ $$\sum_i(X_i\beta_j - y_i)X{_i}{^i} = 0$$
 **3 任务or疑问**
 
 > 明天装个画图软件画图!
+
+## **2017-07-26**
+
+**1 画图**
+![](/blog/assets/kernel/tensorflow-5.png)
+
+## **2017-07-27**
+
+**1 python代码中如何书写类?**
+```
+class Student(object):			#类名
+    def __init__(self, name, score):	#类似于构造函数的函数
+        self.name = name
+        self.score = score
+
+    def printScore(self):		#成员函数
+        print'%s : %s' % (self.name, self.score)
+
+```
+
+具体的python类的书写可以参考[Python中的类(classes)](http://blog.csdn.net/on_1y/article/details/8640012)
+
+**2 python中如何书写被其他模块引用的模块**
+
+假设上文中的Student类被写在A/test/test.py中,在A/中有test1.py想要引用Student类.
+```
+from test.test import *
+
+cla = Student('Claruarius', '95')
+cla.printScore();
+
+```
+然后运行python test.py出现如下的错误:
+```
+Traceback (most recent call last):
+  File "test1.py", line 1, in <module>
+    from test.test import *
+ImportError: No module named test
+```
+为了能够让其他模块引用到Student类,需要在Student类的同级目录下存在一个__init__.py的文件,即使这个文件是空的.
+
+**3 import与 from XXX import XXX有什么区别**
+
+区别如下:
+![](/blog/assets/kernel/tensorflow-6.png)
+![](/blog/assets/kernel/tensorflow-7.png)
+
+**4 什么是.i文件**
+
+.i就是SWIG的interface文件
+
+**5 几个emacs常用的命令**
+
+(1)M-x rgrep 输入要查找的单词
+
+(2)M-x find-name-dired 输入查找名称
+
+(3)
+C-w剪切
+
+M-w复制
+
+C-y粘贴
+
+**6 任务or疑问**
+
+> SWIG是什么? bazel是什么?
+> 
+> 如何看懂tensorflow源码
+> 
+> emacs显示目录, emacs快速切换窗口
+
+明天加油!
