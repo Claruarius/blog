@@ -6,6 +6,76 @@ categories: Linux
 tags: Kernel
 excerpt: 这个是一个特殊的笔记,因为还在学习中, 所以也就用了一些特殊的方法隐藏起来, 如果你看到了请不要笑话, 该文用来记录我学习python, tensorflow的笔记。
 ---
+
+## **2017-07-30**
+
+**1 什么是SWIG**
+
+SWIG是个帮助使用C或者C++编写的软件能与其它各种高级编程语言进行嵌入联接的开发工具。SWIG能应用于各种不同类型的语言包括常用脚本编译语言例如Perl, PHP, Python, Tcl, Ruby and PHP。支持语言列表中也包括非脚本编译语言，例如C#, Common Lisp (CLISP, Allegro CL, CFFI, UFFI), Java, Modula-3, OCAML以及R，甚至是编译器或者汇编的计划应用（Guile, MzScheme, Chicken）。SWIG普遍应用于创建高级语言解析或汇编程序环境，用户接口，作为一种用来测试C/C++或进行原型设计的工具。SWIG还能够导出XML或Lisp s-expressions格式的解析树。SWIG可以被自由使用，发布，修改用于商业或非商业中。
+
+简单说来就是C/C++用来与其他脚本语言沟通的工具
+
+**2 使用SWIG编写C++模块的python接口**
+
+1 安装SWIG, sudo apt-get install swig
+
+2 编写C++代码
+
+{% highlight C++ %}
+#include <time.h>
+
+double My_variable = 3.0;
+
+int fact(int n) {
+  if(n <= 1) return 1;
+  else return n * fact(n-1);
+}
+
+int my_mod(int x, int y) {
+  return (x%y);
+}
+
+char* get_time() {
+  time_t ltime;
+  time(&ltime);
+  return ctime(&ltime);
+}
+
+{% endhighlight %}
+
+3 编写swig接口文件
+
+{% highlight swig %}
+%module example
+%{
+  extern double My_variable;
+  extern int fact(int n);
+  extern int my_mod(int x, int y);
+  extern char* get_time();
+%}
+
+extern double My_variable;
+extern int fact(int n);
+extern int my_mod(int x, int y);
+extern char *get_time();
+
+{% endhighlight %}
+
+4 执行以下命令
+
+```
+swig -python example.i
+
+gcc -c example.c example_wrap.c -I/usr/include/python2.7/ -fPIC
+
+ld -shared example.o example_wrap.o -o _example.so 
+```
+
+5  接下来就可以在python文件中使用example模块
+
+![](/blog/assets/kernel/tensorflow-9.png)
+
+
 ## **2017-07-28到2017-07-29**
 
 **1 emacs显示目录, emacs快速切换窗口**
