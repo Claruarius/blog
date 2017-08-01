@@ -7,6 +7,18 @@ tags: Kernel
 excerpt: 这个是一个特殊的笔记,因为还在学习中, 所以也就用了一些特殊的方法隐藏起来, 如果你看到了请不要笑话, 该文用来记录我学习python, tensorflow的笔记。
 ---
 
+## **2017-08-01**
+
+[如何学习tensorflow源码](http://bingotree.cn/?p=862&utm_source=tuicool&utm_medium=referral)
+
+## **2017-07-31**
+
+**1 什么是BAZEL**
+
+bazel是Google用来构建代码的工具,可以参考文章[Bazel入门](http://www.jianshu.com/p/b2c41344c554)进行理解
+
+
+
 ## **2017-07-30**
 
 **1 什么是SWIG**
