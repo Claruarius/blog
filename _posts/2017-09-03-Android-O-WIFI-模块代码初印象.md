@@ -100,7 +100,7 @@ D） Out目录中编译HIDL文件之后生成的c++文件在./out/soong/.interme
 
 ![](/blog/assets/wifi/wifi-android-O-new-native-11.png)
 
-综上所述，Wificond的实现是使用AIDL实现的，但是不同于以往的AIDL，该Service端使用的是C++编写的，/system/connectivity/wificond/server.[h|c]
+综上所述，Wificond的实现是使用AIDL实现的，但是不同于以往的AIDL，该Service端使用的是C++编写的，/system/connectivity/wificond/server.h
 
 5） 函数调用
 
