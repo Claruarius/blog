@@ -7,9 +7,76 @@ tags: Kernel
 excerpt: 这个是一个特殊的笔记,因为还在学习中, 所以也就用了一些特殊的方法隐藏起来, 如果你看到了请不要笑话, 该文用来记录我学习python, tensorflow的笔记。
 ---
 
+## **2017-10-11**
+
+1 第一段代码
+```
+import tensorflow as tf
+import numpy as np
+
+x_data = np.float32(np.random.rand(2, 100))
+y_data = np.dot([0.100, 0.200], x_data) + 0.300
+
+b = tf.Variable(tf.zeros([1]), name="b")
+W = tf.Variable(tf.random_uniform([1, 2], -1.0, 1.0), name="W")
+y = tf.add(tf.matmul(W, x_data, name="MatMul"), b, name="Add")
+
+loss = tf.reduce_mean(tf.square(tf.sub(y, y_data, name="Sub"), name="Square"), name="ReduceMean")
+
+optimizer = tf.train.GradientDescentOptimizer(0.001, name="Optimizer")
+
+train = optimizer.minimize(loss, name="minimize")
+
+summaries = [tf.histogram_summary("W", W), tf.histogram_summary("b", b), tf.scalar_summary("loss", loss)]
+
+summary_op = tf.merge_summary(summaries)
+
+init = tf.initialize_all_variables()
+
+sess = tf.Session()
+sess.run(init)
+summary_writer = tf.train.SummaryWriter("./log", graph_def=sess.graph_def)
+
+for step in xrange(0, 300):
+    sess.run(train)
+    if step % 10 == 0:
+        summary_str = sess.run(summary_op)
+        summary_writer.add_summary(summary_str, global_step=step)
+```
+
+2 执行 python first.py
+
+3 在当前目录下面会生成log文件夹, 里面有一个二进制文件`event.out.{time}.{machine-name}`
+
+4 在当前路径下打开中断执行`tensorboard --logdir=log`
+
+5 根据提示在浏览器输入`http://localhost:6006`, 即可查看分析图表
+
+**6 问题**
+
+(1) tf.histogram_summary与tf.scalar_summary的区别
+
+(2)
+```
+train = optimizer.nimimize(loss, name="nimimize")
+summary_op = tf.merge_summary(summaries)
+
+sess.run(init)
+sess.run(train)
+sess.run(summary_op)
+```
+
+op 与 run的关系?
+
+(3) tensorflow 如何生成分析图表,如何查看分析图表
+
+最后的最后, 告诉自己不要急躁, You can
+
+
+
 ## **2017-08-01**
 
-[如何学习tensorflow源码](http://bingotree.cn/?p=862&utm_source=tuicool&utm_medium=referral)
+[『深度长文』Tensorflow代码解析(二)](https://mp.weixin.qq.com/s?__biz=MzI1NTE4NTUwOQ==&mid=2650325959&idx=1&sn=983fa9ab0bbe515a3911461b9c41cc34&chksm=f235a4cdc5422ddbc35db22feeb1c6ac5738b74f4078511c1899dd268bae37e2233371d92cf4&mpshare=1&scene=1&srcid=1011ezfoF8ew5q3JghYFTKOG&pass_ticket=DIT3EsRjGEjp%2B5jJfWTVquMf3e0i4PdVn%2BDMk3sCQKtY0IUNICIwKak5d2Es8G3h#rd)
 
 ## **2017-07-31**
 
