@@ -1,3 +1,12 @@
+---
+date: 2017-07-23
+layout: post
+title: Linux内核-tensorflow学习笔记
+categories: Linux
+tags: Kernel
+excerpt: 这个是一个特殊的笔记,因为还在学习中, 所以也就用了一些特殊的方法隐藏起来, 如果你看到了请不要笑话, 该文用来记录我学习python, tensorflow的笔记。
+---
+
 ## **2017-10-15**
 
 1 把10月11号的参数给试出来了,应该训练10000次, 步伐长度为0.002. 才能达到效果.
