@@ -40,7 +40,7 @@ strA 和 strA1 的地址应该是一样的, strC就是另一个字符串常量�
         String strC = strA + strA1;
         System.out.println("strC hashCOde: " + strC.hashCode());
 ```
-![](/blog/assets/language/java-string-.1png)
+![](/blog/assets/language/java-string-1.png)
 
 可见, 结果是一样的.
 
