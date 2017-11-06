@@ -1,8 +1,0 @@
----
-date: 2017-09-03
-layout: post
-title: Android O 中WIFI代码初印象
-categories: Android
-tags: Wi-Fi
-excerpt: Android O中对HAL层进行大刀阔斧的改变, 将HAL层抽象成类似于AIDL中的Service.
----
