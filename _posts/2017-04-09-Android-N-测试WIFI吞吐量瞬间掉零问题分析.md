@@ -3,7 +3,7 @@ date: 2017-04-09
 layout: post
 title: Android N 测试WIFI吞吐量瞬间掉零问题分析
 categories: Android
-tags: WIFI
+tags: Wi-Fi
 excerpt: 最近有一个问题是Android 7.1软件版本上测试WIFI吞吐量时候经常出现掉0情况, 后来跟高通一起排查, 是因为Google在Android 7.1 代码修改导致的. 
 ---
 
