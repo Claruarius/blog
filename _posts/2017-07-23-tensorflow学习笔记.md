@@ -17,7 +17,7 @@ excerpt: 这个是一个特殊的笔记,因为还在学习中, 所以也就用�
 ## **2017-10-11**
 
 1 第一段代码
-
+```
 b = tf.Variable(tf.zeros([1]), name="b")
 W = tf.Variable(tf.random_uniform([1, 2], -1.0, 1.0), name="W")
 y = tf.add(tf.matmul(W, x_data, name="MatMul"), b, name="Add")
