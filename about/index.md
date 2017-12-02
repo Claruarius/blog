@@ -18,7 +18,7 @@ layout: page
 
 * 2011.09 ~ 2015.06 求学于南中国一般大学（South China Normal University）计算机学院
 
-* 2015.06 ~ Now     在捷开通讯（深圳）有限公司任职android开发，系统，wifi，frameworks有一定的涉略
+* 2015.06 ~ 2017.11     在捷开通讯（深圳）有限公司任职android开发，系统，wifi，frameworks有一定的涉略
 
 
 ----
